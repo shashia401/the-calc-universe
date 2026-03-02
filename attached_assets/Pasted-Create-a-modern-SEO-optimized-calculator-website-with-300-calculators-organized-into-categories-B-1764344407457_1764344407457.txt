@@ -1,0 +1,183 @@
+Create a modern, SEO-optimized calculator website with 300+ calculators organized into categories. Build using React, Next.js, and Tailwind CSS.
+
+## CORE REQUIREMENTS
+
+### Site Structure:
+1. Homepage with:
+   - Hero section with search bar and value proposition
+   - 6 main category cards (Math, Health & Fitness, Financial, Conversion Tools, Date & Time, Education)
+   - Featured/Popular calculators grid (12 calculators)
+   - "Recently Added" section
+   - Newsletter signup
+
+2. Category pages showing:
+   - Category overview with description
+   - Sub-category sections with 4-5 calculators each
+   - Breadcrumb navigation
+   - Sidebar with category navigation
+
+3. Individual calculator pages with:
+   - Calculator tool (functional and interactive)
+   - Step-by-step usage instructions
+   - Formula explanation
+   - Real-world examples
+   - FAQ section (5-10 questions)
+   - "Related Calculators" sidebar
+   - Breadcrumb navigation
+   - Share/Print buttons
+   - Save calculation feature (localStorage)
+
+### Navigation System:
+- Sticky top navbar with mega menu dropdown
+- Search functionality with autocomplete
+- Breadcrumbs on all pages
+- Sidebar navigation on calculator/category pages
+- Mobile-responsive hamburger menu
+
+### Calculator Examples to Include:
+
+**Math Calculators:**
+- Percentage Calculator
+- Fraction Calculator
+- Scientific Calculator
+- Average Calculator
+- Prime Number Checker
+
+**Health & Fitness:**
+- BMI Calculator
+- Calorie Calculator
+- Body Fat Calculator
+- Ideal Weight Calculator
+- Water Intake Calculator
+
+**Financial:**
+- Mortgage Calculator
+- Loan Calculator
+- Compound Interest Calculator
+- Tip Calculator
+- Currency Converter
+
+**Conversion Tools:**
+- Length Converter
+- Weight Converter
+- Temperature Converter
+- Area Converter
+- Speed Converter
+
+**Date & Time:**
+- Age Calculator
+- Date Difference Calculator
+- Time Zone Converter
+- Working Days Calculator
+- Days Until Calculator
+
+**Education:**
+- GPA Calculator
+- Grade Calculator
+- Study Time Calculator
+- Assignment Deadline Tracker
+- Test Score Percentage
+
+### Design Requirements:
+- Clean, modern UI with good whitespace
+- Mobile-first responsive design
+- Fast loading (optimize images, lazy loading)
+- Accessibility compliant (ARIA labels, keyboard navigation)
+- Color scheme: Professional blues/grays with accent colors
+- Icons for each category (use Lucide React icons)
+- Smooth animations and transitions
+
+### SEO Features:
+- Dynamic meta titles and descriptions for each page
+- Schema markup for calculators (SoftwareApplication, FAQPage, BreadcrumbList)
+- Semantic HTML structure (proper heading hierarchy)
+- Clean URLs (e.g., /financial/mortgage-calculator)
+- Sitemap generation
+- robots.txt
+- Open Graph tags for social sharing
+
+### Technical Features:
+- Client-side calculation (no backend needed initially)
+- Save recent calculations in localStorage
+- Search with fuzzy matching across all calculators
+- Print-friendly calculator results
+- Share results via URL parameters
+- Dark mode toggle
+- Analytics tracking setup (Google Analytics placeholder)
+
+### Content for Each Calculator Page:
+Each calculator should have:
+- H1: Calculator name
+- Introduction paragraph (100-150 words)
+- Interactive calculator form
+- "How to Use" section (200-300 words)
+- "Understanding Results" section (150-200 words)
+- "Formula Explanation" (100-200 words)
+- 3 real-world example scenarios
+- FAQ section with 5-10 questions
+- Related calculators section (4-6 suggestions)
+
+### Additional Pages:
+- About page
+- Contact page
+- Privacy Policy
+- Terms of Service
+- Blog section (with 3 sample blog posts linking to calculators)
+
+### Performance Requirements:
+- Page load under 2 seconds
+- Lighthouse score > 90 for all metrics
+- Core Web Vitals optimized
+- Lazy load images and non-critical calculators
+- Code splitting for calculator components
+
+### Data Structure:
+Create a JSON structure for organizing calculators:
+```json
+{
+  "categories": [
+    {
+      "id": "math",
+      "name": "Math Calculators",
+      "icon": "Calculator",
+      "description": "Essential math calculation tools",
+      "subcategories": [
+        {
+          "id": "basic-math",
+          "name": "Basic Math",
+          "calculators": [
+            {
+              "id": "percentage-calculator",
+              "name": "Percentage Calculator",
+              "description": "Calculate percentages easily",
+              "popular": true,
+              "tags": ["percentage", "math", "basic"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Implementation Notes:
+- Use React hooks for calculator logic
+- Create reusable Calculator Layout component
+- Build a Calculator Registry system for easy addition of new calculators
+- Implement search indexing for all calculators
+- Use Next.js dynamic routing for calculator pages
+- Add error handling for invalid inputs
+- Include input validation with helpful error messages
+- Make all calculators work with keyboard navigation
+
+### Bonus Features:
+- "Compare" feature for similar calculators
+- Calculator history panel
+- Favorites/Bookmark functionality
+- Embeddable widget code generation
+- PDF export of results
+- Multi-language support placeholder
+- Unit test examples for calculator logic
+
+Start with the homepage, category navigation, and 5-10 fully functional calculators across different categories. Make the architecture scalable so adding new calculators is straightforward.
