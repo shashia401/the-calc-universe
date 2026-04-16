@@ -807,3 +807,17 @@
   background-size: 400% 400%;
   animation: gradient-shift 15s ease infinite;
 }
+
+/* ── Embed mode ──────────────────────────────────────────────────────── */
+/* In embed mode show only the first (interactive) Card.
+   Hides: educational second Cards, border-t reference sections, and the
+   duplicate "Powered by" div. The sticky footer handles branding. */
+
+/* Pattern A – calculator wraps Cards in a div (e.g. space-y-6): hide 2nd+ */
+[data-embed="true"] .max-w-2xl > div > div > *:nth-child(n+2) {
+  display: none;
+}
+/* Pattern B – calculator returns a fragment: Cards are direct children of LazyCalc root */
+[data-embed="true"] .max-w-2xl > div > *:nth-child(n+2) {
+  display: none;
+}

@@ -50,7 +50,7 @@ export default function Contact() {
                 <Mail className="h-6 w-6 text-blue-600 dark:text-blue-400" />
               </div>
               <h3 className="font-semibold mb-2">Email Us</h3>
-              <p className="text-sm text-muted-foreground">support@calchub.com</p>
+              <p className="text-sm text-muted-foreground">support@thecalcuniverse.com</p>
             </CardContent>
           </Card>
 

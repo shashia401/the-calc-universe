@@ -86,7 +86,7 @@ export default function FractionCalculator() {
       case "divide":
         if (n2 === 0) {
           steps.push("Cannot divide by zero (second fraction's numerator is 0)");
-          setResult({ numerator: 0, denominator: 1, decimal: 0, steps, simplified: { numerator: 0, denominator: 1 } });
+          setResult({ whole: 0, numerator: 0, denominator: 1, decimal: 0, steps });
           return;
         }
         steps.push(`Step 1: Flip the second fraction: ${n2}/${d2} becomes ${d2}/${n2}`);

@@ -30,7 +30,7 @@ export default function Home() {
       <SEOHead
         title="Free Online Calculators"
         description={`The Calc Universe offers ${getCalculatorCount()}+ free online calculators for math, finance, health, conversions, and more. Fast, accurate, and private calculations in your browser.`}
-        canonicalUrl="https://calchub.com"
+        canonicalUrl="https://thecalcuniverse.com"
         structuredData={generateWebsiteSchema()}
       />
       <Hero onSelectCalculator={handleCalculatorSelect} />

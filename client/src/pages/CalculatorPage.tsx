@@ -1024,7 +1024,7 @@ export default function CalculatorPage() {
     setLocation(`/${calc.categoryId}/${calc.id}`);
   };
 
-  const canonicalUrl = `https://calchub.com/${category.id}/${calculator.id}`;
+  const canonicalUrl = `https://thecalcuniverse.com/${category.id}/${calculator.id}`;
   
   const combinedSchema = {
     "@context": "https://schema.org",
@@ -1035,8 +1035,8 @@ export default function CalculatorPage() {
         url: canonicalUrl,
       }),
       generateBreadcrumbSchema([
-        { name: "Home", url: "https://calchub.com" },
-        { name: category.name, url: `https://calchub.com/${category.id}` },
+        { name: "Home", url: "https://thecalcuniverse.com" },
+        { name: category.name, url: `https://thecalcuniverse.com/${category.id}` },
         { name: calculator.name, url: canonicalUrl },
       ]),
       generateFAQSchema(faqs),
@@ -1083,64 +1083,13 @@ export default function CalculatorPage() {
               </Button>
             </div>
 
-            <div className="print:hidden">
-              <LazyCalculator calculatorId={calculatorId || ""} />
-            </div>
+            <LazyCalculator calculatorId={calculatorId || ""} />
 
-            {/* Print-only formatted calculation section */}
-            <div className="hidden print:block print:mt-4">
-              <h2 className="text-xl font-bold mb-4">Calculation Details</h2>
-              {history.length > 0 ? (
-                <div className="space-y-6">
-                  {history.slice(0, 5).map((calc, index) => (
-                    <div key={calc.id} className="p-4 border rounded-lg bg-gray-50">
-                      {index > 0 && <div className="text-sm text-gray-500 mb-2">Calculation #{history.length - index}</div>}
-                      {index === 0 && <div className="text-sm font-medium text-gray-700 mb-2">Latest Calculation</div>}
-                      
-                      <div className="mb-3">
-                        <div className="text-sm font-medium text-gray-600 mb-1">Inputs:</div>
-                        <div className="pl-4 text-sm">
-                          {Object.entries(calc.inputs).map(([key, value]) => {
-                            const cleanKey = key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase()).trim();
-                            return <div key={key}>{cleanKey}: {value}</div>;
-                          })}
-                        </div>
-                      </div>
-                      
-                      <div className="mb-3">
-                        <div className="text-sm font-medium text-gray-600 mb-1">Result:</div>
-                        <div className="pl-4 text-lg font-bold">{calc.result}</div>
-                      </div>
-                      
-                      {calc.formula && (
-                        <div className="mb-3">
-                          <div className="text-sm font-medium text-gray-600 mb-1">Formula:</div>
-                          <div className="pl-4 font-mono text-sm bg-gray-100 p-2 rounded">{calc.formula}</div>
-                        </div>
-                      )}
-                      
-                      {calc.steps && calc.steps.length > 0 && (
-                        <div>
-                          <div className="text-sm font-medium text-gray-600 mb-1">Step-by-Step:</div>
-                          <div className="pl-4 space-y-1">
-                            {calc.steps.map((step, idx) => (
-                              <div key={idx} className="text-sm">
-                                <span className="font-medium">{step.label}:</span> {step.value}
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-gray-500">No calculations to display.</p>
-              )}
-              <div className="mt-6 pt-4 border-t text-sm text-gray-500">
-                <p>Calculator: {window.location.href}</p>
-                <p>Printed: {new Date().toLocaleDateString()}</p>
-              </div>
+            {/* Print footer */}
+            <div className="hidden print:block mt-6 pt-4 border-t text-sm text-gray-500">
+              <p>Calculator: {window.location.href}</p>
+              <p>Printed: {new Date().toLocaleDateString()}</p>
+              <p>Powered by The Calc Universe — thecalcuniverse.com</p>
             </div>
 
             {/* Screen-only history section */}

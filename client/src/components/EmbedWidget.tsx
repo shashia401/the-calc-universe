@@ -13,8 +13,7 @@ interface EmbedWidgetProps {
 }
 
 export function EmbedWidget({ calculatorId, calculatorName, categoryId }: EmbedWidgetProps) {
-  const [width, setWidth] = useState("100%");
-  const [height, setHeight] = useState("600");
+  const [height, setHeight] = useState("500");
   const [theme, setTheme] = useState("light");
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
@@ -22,30 +21,14 @@ export function EmbedWidget({ calculatorId, calculatorName, categoryId }: EmbedW
   const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://thecalcuniverse.com";
   const embedUrl = `${baseUrl}/embed/${categoryId}/${calculatorId}?theme=${theme}`;
 
-  const iframeCode = `<!-- ${calculatorName} by The Calc Universe (${baseUrl}) -->
-<iframe 
-  src="${embedUrl}"
-  width="${width}"
-  height="${height}px"
-  frameborder="0"
-  style="border: 1px solid #e5e7eb; border-radius: 8px;"
-  title="${calculatorName} - The Calc Universe"
-  loading="lazy"
-></iframe>
-<p style="font-size: 12px; text-align: center; margin-top: 4px;">
-  <a href="${baseUrl}/${categoryId}/${calculatorId}" target="_blank" rel="noopener noreferrer" style="color: #6366f1; text-decoration: none;">
-    ${calculatorName}
-  </a> by <a href="${baseUrl}" target="_blank" rel="noopener noreferrer" style="color: #6366f1; text-decoration: none;">The Calc Universe</a>
-</p>`;
-
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(iframeCode);
+      await navigator.clipboard.writeText(embedUrl);
       setCopied(true);
-      toast({ title: "Copied!", description: "Embed code copied to clipboard." });
+      toast({ title: "Copied!", description: "Embed URL copied to clipboard." });
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      toast({ title: "Copy failed", description: "Please select and copy the code manually." });
+      toast({ title: "Copy failed", description: "Please select and copy the URL manually." });
     }
   };
 
@@ -59,24 +42,11 @@ export function EmbedWidget({ calculatorId, calculatorName, categoryId }: EmbedW
       </CardHeader>
       <CardContent className="space-y-4">
         <p className="text-sm text-muted-foreground" data-testid="text-embed-description">
-          Add this calculator to your website or blog. Copy the code below and paste it into your HTML.
+          Add this calculator to your website using the embed URL below. "Powered by The Calc Universe" branding is built into the embed and cannot be removed.
         </p>
 
-        <div className="grid grid-cols-3 gap-4">
-          <div className="space-y-2">
-            <Label htmlFor="embed-width">Width</Label>
-            <Select value={width} onValueChange={setWidth}>
-              <SelectTrigger id="embed-width" data-testid="select-embed-width">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="100%">Full Width (100%)</SelectItem>
-                <SelectItem value="600">600px</SelectItem>
-                <SelectItem value="500">500px</SelectItem>
-                <SelectItem value="400">400px</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+        {/* Options */}
+        <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label htmlFor="embed-height">Height</Label>
             <Select value={height} onValueChange={setHeight}>
@@ -84,10 +54,9 @@ export function EmbedWidget({ calculatorId, calculatorName, categoryId }: EmbedW
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="800">800px (Tall)</SelectItem>
-                <SelectItem value="600">600px (Standard)</SelectItem>
-                <SelectItem value="500">500px (Compact)</SelectItem>
-                <SelectItem value="400">400px (Small)</SelectItem>
+                <SelectItem value="700">700px (Tall)</SelectItem>
+                <SelectItem value="500">500px (Standard)</SelectItem>
+                <SelectItem value="400">400px (Compact)</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -106,44 +75,43 @@ export function EmbedWidget({ calculatorId, calculatorName, categoryId }: EmbedW
           </div>
         </div>
 
-        <div className="space-y-3 mt-4">
-          <div className="relative">
-            <pre className="p-4 bg-muted rounded-lg text-xs overflow-x-auto whitespace-pre-wrap break-all" data-testid="text-embed-code">
-              {iframeCode}
-            </pre>
+        {/* Live preview */}
+        <div className="space-y-2">
+          <p className="text-sm font-medium">Preview</p>
+          <div className="rounded-lg border overflow-hidden" style={{ height: `${height}px` }}>
+            <iframe
+              src={embedUrl}
+              width="100%"
+              height="100%"
+              frameBorder="0"
+              title={`${calculatorName} - The Calc Universe`}
+              loading="lazy"
+              data-testid="iframe-embed-preview"
+            />
+          </div>
+        </div>
+
+        {/* Embed URL */}
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <ExternalLink className="h-4 w-4 text-muted-foreground" />
+            <span className="text-sm font-medium">Embed URL</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <code
+              className="text-xs bg-muted px-3 py-2 rounded break-all flex-1 select-all"
+              data-testid="text-embed-url"
+            >
+              {embedUrl}
+            </code>
             <Button
-              size="sm"
+              size="icon"
               variant="secondary"
-              className="absolute top-2 right-2"
               onClick={handleCopy}
               data-testid="button-copy-embed"
             >
               {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
             </Button>
-          </div>
-          <p className="text-xs text-muted-foreground">
-            Paste this code in your HTML where you want the calculator to appear.
-          </p>
-        </div>
-
-        <div className="space-y-2 pt-2 border-t">
-          <div className="flex items-center gap-2">
-            <ExternalLink className="h-4 w-4 text-muted-foreground" />
-            <span className="text-sm font-medium">Embed URL:</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <code className="text-xs bg-muted px-2 py-1 rounded break-all flex-1" data-testid="text-embed-url">
-              {embedUrl}
-            </code>
-            <a 
-              href={embedUrl} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-sm text-primary hover:underline whitespace-nowrap"
-              data-testid="link-preview-embed"
-            >
-              Preview
-            </a>
           </div>
         </div>
       </CardContent>

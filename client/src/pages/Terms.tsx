@@ -93,7 +93,7 @@ export default function Terms() {
             <h2 className="text-2xl font-semibold mb-4">Contact</h2>
             <p>
               For questions about these Terms of Service, please contact us at 
-              legal@calchub.com.
+              legal@thecalcuniverse.com.
             </p>
           </section>
         </div>

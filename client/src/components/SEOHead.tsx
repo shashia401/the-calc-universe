@@ -102,7 +102,7 @@ export function generateCalculatorSchema(calculator: {
     provider: {
       "@type": "Organization",
       name: "The Calc Universe",
-      url: "https://calchub.com",
+      url: "https://thecalcuniverse.com",
     },
   };
 }
@@ -112,11 +112,11 @@ export function generateWebsiteSchema() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "The Calc Universe",
-    url: "https://calchub.com",
+    url: "https://thecalcuniverse.com",
     description: "Free online calculators for math, finance, health, and more.",
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://calchub.com/search?q={search_term_string}",
+      target: "https://thecalcuniverse.com/search?q={search_term_string}",
       "query-input": "required name=search_term_string",
     },
   };

@@ -72,7 +72,9 @@ export default function MeanMedianModeCalculator() {
       frequency.set(num, (frequency.get(num) || 0) + 1);
     });
 
-    const maxFreq = Math.max(...frequency.values());
+    const freqValues = Array.from(frequency.values());
+    const freqEntries = Array.from(frequency.entries());
+    const maxFreq = Math.max(...freqValues);
     const modeSteps: string[] = [];
     modeSteps.push(`Count occurrences of each value:`);
     
@@ -82,7 +84,7 @@ export default function MeanMedianModeCalculator() {
 
     let mode: number[] | null = null;
     if (maxFreq > 1) {
-      mode = Array.from(frequency.entries())
+      mode = freqEntries
         .filter(([_, count]) => count === maxFreq)
         .map(([value, _]) => value);
       modeSteps.push(`Most frequent (${maxFreq} times): ${mode.join(", ")}`);

@@ -53,48 +53,33 @@ export default function CategoryPage() {
     };
   }, [isAllCalculatorsPage, setActiveScrollCategory]);
 
-  // Intersection Observer to highlight active category based on scroll
+  // IntersectionObserver-based scroll spy.
+  // rootMargin creates a thin strip near the top of the viewport (~80-200px).
+  // When a section's top enters that strip it becomes active. Works whether
+  // the page scrolls on window or on an inner container.
   useEffect(() => {
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      if (isScrollingRef.current) return;
+    if (!isAllCalculatorsPage) return;
 
-      let topMostId = "";
-      let topMostTop = Infinity;
-
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const rect = entry.boundingClientRect;
-          if (rect.top < topMostTop) {
-            topMostTop = rect.top;
-            topMostId = entry.target.id;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveScrollCategory(entry.target.id);
           }
-        }
-      });
-
-      if (topMostId) {
-        setActiveCategory(topMostId);
-        if (isAllCalculatorsPage) {
-          setActiveScrollCategory(topMostId);
-        }
+        });
+      },
+      {
+        // Fire when section top enters the band between 80px and 35% from the top
+        rootMargin: "-80px 0px -65% 0px",
+        threshold: 0,
       }
-    };
+    );
 
-    const observer = new IntersectionObserver(observerCallback, {
-      root: null,
-      rootMargin: "0px 0px -50% 0px",
-      threshold: 0,
+    Object.values(categoryRefs.current).forEach((el) => {
+      if (el) observer.observe(el);
     });
 
-    const timer = requestAnimationFrame(() => {
-      Object.values(categoryRefs.current).forEach((ref) => {
-        if (ref) observer.observe(ref);
-      });
-    });
-
-    return () => {
-      cancelAnimationFrame(timer);
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, [isAllCalculatorsPage, setActiveScrollCategory]);
 
   // Only show "not found" if we have a specific categoryId that doesn't match any category
@@ -140,10 +125,10 @@ export default function CategoryPage() {
       <SEOHead
         title={`Calculators - ${totalCalculators} Free Tools`}
         description={`Browse ${totalCalculators} free calculators across Math, Health & Fitness, Finance, Conversions, Date & Time, and Education. Fast, accurate calculations in your browser.`}
-        canonicalUrl={`https://calchub.com/calculators`}
+        canonicalUrl={`https://thecalcuniverse.com/calculators`}
         structuredData={generateBreadcrumbSchema([
-          { name: "Home", url: "https://calchub.com" },
-          { name: "Calculators", url: "https://calchub.com/calculators" },
+          { name: "Home", url: "https://thecalcuniverse.com" },
+          { name: "Calculators", url: "https://thecalcuniverse.com/calculators" },
         ])}
       />
       

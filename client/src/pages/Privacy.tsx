@@ -74,7 +74,7 @@ export default function Privacy() {
             <h2 className="text-2xl font-semibold mb-4">Contact Us</h2>
             <p>
               If you have any questions about this Privacy Policy, please contact us at 
-              privacy@calchub.com.
+              privacy@thecalcuniverse.com.
             </p>
           </section>
         </div>

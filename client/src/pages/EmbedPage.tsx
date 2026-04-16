@@ -34,53 +34,34 @@ export default function EmbedPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col" data-embed="true">
       <SEOHead
         title={`${calculator.name} - Embed`}
         description={calculator.description}
         noindex={true}
       />
+
       <div className="flex-1 p-4">
         <div className="max-w-2xl mx-auto">
-          <div className="mb-4">
-            <h1 className="text-xl font-bold">{calculator.name}</h1>
-            <p className="text-sm text-muted-foreground">{calculator.shortDescription}</p>
-            <p className="text-xs text-muted-foreground mt-1">
-              Powered by{" "}
-              <a
-                href="https://thecalcuniverse.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-semibold text-primary hover:underline"
-                data-testid="link-powered-by-embed"
-              >
-                The Calc Universe
-              </a>
-            </p>
-          </div>
-
           <LazyCalculator calculatorId={calculatorId || ""} />
         </div>
       </div>
 
       <div 
-        className="sticky bottom-0 w-full bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 border-t py-3 px-4"
-        style={{ 
-          pointerEvents: 'auto',
-          userSelect: 'none'
-        }}
+        className="sticky bottom-0 w-full bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 border-t py-2 px-4"
+        style={{ pointerEvents: 'auto', userSelect: 'none' }}
       >
-        <div className="max-w-2xl mx-auto flex items-center justify-center gap-2 text-sm">
-          <span className="text-muted-foreground">Visit</span>
+        <div className="max-w-2xl mx-auto flex items-center justify-center gap-2 text-xs">
+          <span className="text-muted-foreground">Powered by</span>
           <a
             href="https://thecalcuniverse.com/"
             target="_blank"
             rel="noopener noreferrer"
             className="font-semibold text-primary hover:underline"
+            data-testid="link-powered-by-embed"
           >
-            thecalcuniverse.com
+            The Calc Universe
           </a>
-          <span className="text-muted-foreground">for more calculations and to learn more!</span>
         </div>
       </div>
     </div>
